@@ -19,7 +19,7 @@ class ApplicationPresenter: ApplicationContract.Presenter() {
     }
     override fun  onButtonTapped(stationStart:String, stationEnd:String):String{
 
-        return "https://www.lner.co.uk/travel-information/travelling-now/live-train-times/depart/DHM/KGX/#LiveDepResults"
+        return "https://www.lner.co.uk/travel-information/travelling-now/live-train-times/depart/"+stationStart+"/"+stationEnd+"/#LiveDepResults"
 
     }
 
