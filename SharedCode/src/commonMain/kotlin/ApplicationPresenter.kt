@@ -5,6 +5,7 @@ import kotlin.coroutines.CoroutineContext
 
 class ApplicationPresenter: ApplicationContract.Presenter() {
 
+
     private val dispatchers = AppDispatchersImpl()
     private var view: ApplicationContract.View? = null
     private val job: Job = SupervisorJob()
@@ -16,4 +17,10 @@ class ApplicationPresenter: ApplicationContract.Presenter() {
         this.view = view
         view.setLabel(createApplicationScreenMessage())
     }
+    override fun  onButtonTapped(stationStart:String, stationEnd:String):String{
+
+        return "https://www.lner.co.uk/travel-information/travelling-now/live-train-times/depart/DHM/KGX/#LiveDepResults"
+
+    }
+
 }
