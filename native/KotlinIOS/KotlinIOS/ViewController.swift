@@ -10,7 +10,7 @@ class ViewController: UIViewController {
     private var station1: String = ""
     private var station2: String = ""
     private let presenter: ApplicationContractPresenter = ApplicationPresenter()
-    private let stationData: [String] = ["KGX","EUS", "BHM", "DHM", "YRK"]
+    private let stationData: [String] = ["Kings Cross", "Euston", "Durham", "York", "Birmingham New Street"]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -23,7 +23,7 @@ class ViewController: UIViewController {
     
 
     @IBAction func openURL(_ sender: UIButton ) {
-        let URLstring: String = presenter.onButtonTapped(stationStart: station1, stationEnd:station2)
+        let URLstring: String = presenter.onButtonTapped(stationStart: presenter.convertToCode(stationName: station1), stationEnd: presenter.convertToCode(stationName: station2))
         UIApplication.shared.open(URL(string:URLstring)! as URL, options: [:], completionHandler:nil)
         
     }

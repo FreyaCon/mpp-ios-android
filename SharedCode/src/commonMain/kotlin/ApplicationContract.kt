@@ -11,5 +11,6 @@ interface ApplicationContract {
     abstract class Presenter: CoroutineScope {
         abstract fun onViewTaken(view: View)
         abstract fun onButtonTapped(stationStart:String, stationEnd:String):String
+        abstract fun convertToCode(stationName:String): String
     }
 }
