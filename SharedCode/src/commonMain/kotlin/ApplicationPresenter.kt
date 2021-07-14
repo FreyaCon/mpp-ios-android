@@ -9,6 +9,7 @@ class ApplicationPresenter: ApplicationContract.Presenter() {
     private val dispatchers = AppDispatchersImpl()
     private var view: ApplicationContract.View? = null
     private val job: Job = SupervisorJob()
+    val stations = arrayOf("Kings Cross", "Euston", "Durham", "York", "Birmingham New Street")
 
     override val coroutineContext: CoroutineContext
         get() = dispatchers.main + job
@@ -22,5 +23,6 @@ class ApplicationPresenter: ApplicationContract.Presenter() {
         return "https://www.lner.co.uk/travel-information/travelling-now/live-train-times/depart/"+stationStart+"/"+stationEnd+"/#LiveDepResults"
 
     }
+
 
 }

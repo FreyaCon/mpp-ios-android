@@ -6,7 +6,6 @@ interface ApplicationContract {
     interface View {
         fun setLabel(text: String)
 
-
     }
 
     abstract class Presenter: CoroutineScope {
