@@ -102,7 +102,9 @@
                     </view>
                     <connections>
                         <outlet property="button" destination="mPV-Pl-jd5" id="9Os-oH-iLU"/>
+                        <outlet property="endStation" destination="U4D-2H-UMH" id="Rzn-H5-0y8"/>
                         <outlet property="label" destination="Bvm-TJ-sDP" id="0K4-VH-gLR"/>
+                        <outlet property="startStation" destination="4Qf-aH-mHd" id="Usu-1P-6nJ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
