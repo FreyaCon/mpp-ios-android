@@ -27,6 +27,8 @@ class MainActivity : AppCompatActivity(), ApplicationContract.View {
         setContentView(R.layout.activity_main)
 
         val presenter = ApplicationPresenter()
+        var station1:String = ""
+        var station2:String =""
         presenter.onViewTaken(this)
 
 
@@ -42,6 +44,7 @@ class MainActivity : AppCompatActivity(), ApplicationContract.View {
                 Toast.makeText(this@MainActivity,
 
                                 "" + presenter.stations[position], Toast.LENGTH_SHORT).show()
+                station1= presenter.convertToCode(presenter.stations[position])
             }
 
             override fun onNothingSelected(arg0: AdapterView<*>) {
@@ -54,6 +57,8 @@ class MainActivity : AppCompatActivity(), ApplicationContract.View {
                 Toast.makeText(this@MainActivity,
 
                         "" + presenter.stations[position], Toast.LENGTH_SHORT).show()
+                station2= presenter.convertToCode(presenter.stations[position])
+
             }
 
             override fun onNothingSelected(arg0: AdapterView<*>) {
@@ -62,7 +67,7 @@ class MainActivity : AppCompatActivity(), ApplicationContract.View {
         // Set Adapter to Spinner
         val searchButton:Button = findViewById(R.id.my_button)
         searchButton.setOnClickListener {
-            val URL = presenter.onButtonTapped("DHM", "KGX")
+            val URL = presenter.onButtonTapped(station1, station2)
             val openURL = Intent(android.content.Intent.ACTION_VIEW)
             openURL.data = Uri.parse(URL)
             startActivity(openURL)

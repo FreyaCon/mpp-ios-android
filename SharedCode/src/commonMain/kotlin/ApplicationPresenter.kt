@@ -4,6 +4,16 @@ import kotlinx.coroutines.*
 import kotlin.coroutines.CoroutineContext
 
 class ApplicationPresenter: ApplicationContract.Presenter() {
+    fun convertToCode(stationName:String):String{
+        when(stationName){
+            "Durham"-> return "DHM"
+            "York" -> return "YRK"
+            "Kings Cross" -> return "KGX"
+            "Euston" -> return "EUS"
+            "Birmingham New Street"-> return "BHM"
+        }
+        return "KGX"
+    }
 
 
     private val dispatchers = AppDispatchersImpl()
