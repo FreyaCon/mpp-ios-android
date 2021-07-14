@@ -10,7 +10,6 @@ class ViewController: UIViewController {
         let URLstring: String = presenter.onButtonTapped(stationStart: "DHM", stationEnd:"KGX")
         UIApplication.shared.open(URL(string:URLstring)! as URL, options: [:], completionHandler:nil)
         
-        
     }
     private let presenter: ApplicationContractPresenter = ApplicationPresenter()
     
