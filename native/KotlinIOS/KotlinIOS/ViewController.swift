@@ -29,7 +29,7 @@ class ViewController: UIViewController {
     
 }
 
-extension ViewController: ApplicationContractView {
+extension ViewController: ApplicationContractView { //Functions required in the contract
     func setLabel(text: String) {
         label.text = text
     }
@@ -43,7 +43,7 @@ extension ViewController: ApplicationContractView {
     }
 }
 
-extension ViewController: UIPickerViewDelegate {
+extension ViewController: UIPickerViewDelegate {//functions set the spinner options and retrieve current selections
     func pickerView(_ picker: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
         return stationData[row].name
     }
@@ -58,7 +58,7 @@ extension ViewController: UIPickerViewDelegate {
     }
 }
 
-extension ViewController: UIPickerViewDataSource {
+extension ViewController: UIPickerViewDataSource {//functions required by UIPickerViewDataSource to set up spinners
     func numberOfComponents(in picker: UIPickerView) -> Int {
         return 1
     }

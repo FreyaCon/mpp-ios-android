@@ -5,7 +5,7 @@ class Station(stationName: String, stationCode: String){
     val code = stationCode
 }
 
-val kings = Station("London King's Cross", "KGX")
+val kings = Station("London Kings Cross", "KGX")
 val euston = Station("London Euston", "EUS")
 val durham = Station("Durham", "DHM")
 val birm = Station("Birmingham New Street", "BHM")
