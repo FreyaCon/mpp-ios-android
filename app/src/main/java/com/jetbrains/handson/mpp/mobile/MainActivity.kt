@@ -67,16 +67,20 @@ class MainActivity : AppCompatActivity(), ApplicationContract.View {
         // Set Adapter to Spinner
         val searchButton:Button = findViewById(R.id.my_button)
         searchButton.setOnClickListener {
-            val URL = presenter.onButtonTapped(station1, station2)
-            val openURL = Intent(android.content.Intent.ACTION_VIEW)
-            openURL.data = Uri.parse(URL)
-            startActivity(openURL)
+            getDataNow(this)
         }
 
     }
 
     override fun setLabel(text: String) {
         findViewById<TextView>(R.id.main_text).text = text
+    }
+    fun getDataNow(view: ApplicationContract.View) {
+        val presenter = ApplicationPresenter()
+        val stationStart="Kings Cross"
+        val stationEnd = "Durham"
+        val url = presenter.addSelectedStations(stationStart,stationEnd)
+        print(presenter.getData(view,url))
     }
 
 
