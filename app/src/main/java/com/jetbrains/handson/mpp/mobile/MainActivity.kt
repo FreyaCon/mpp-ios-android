@@ -35,6 +35,7 @@ class MainActivity : AppCompatActivity(), ApplicationContract.View {
             }
             return stationNames
         }
+
         //setting adapter for spinners
         val aa = ArrayAdapter(this, android.R.layout.simple_spinner_item, names(stations))
         stations_spinner.adapter= aa
@@ -67,7 +68,7 @@ class MainActivity : AppCompatActivity(), ApplicationContract.View {
         //Set response to hitting the button
         val searchButton:Button = findViewById(R.id.my_button)
         searchButton.setOnClickListener {
-            getDataNow(this)
+            presenter.onButtonTapped(station1,station2)
         }
 
     }
@@ -75,11 +76,6 @@ class MainActivity : AppCompatActivity(), ApplicationContract.View {
     //functions promised in the contract
     override fun setLabel(text: String) {
         findViewById<TextView>(R.id.main_text).text = text
-    }
-
-    fun getDataNow(view: ApplicationContract.View) {
-        val url = presenter.addSelectedStations(station1,station2)
-        print(presenter.getData(view,url))
     }
 
     override fun setStations() {
