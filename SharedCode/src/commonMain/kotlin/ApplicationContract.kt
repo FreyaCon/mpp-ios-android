@@ -14,5 +14,8 @@ interface ApplicationContract {
         abstract fun onViewTaken(view: View)
         abstract fun onButtonTapped(stationStart:Station, stationEnd:Station)
         abstract val stations: List<Station>
+        abstract fun addSelectedStations(arrivalStation: Station, departureStation: Station): String
+        abstract fun getData(view: ApplicationContract.View,url: String)
+
     }
 }

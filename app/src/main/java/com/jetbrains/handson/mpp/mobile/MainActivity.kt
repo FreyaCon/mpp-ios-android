@@ -67,7 +67,7 @@ class MainActivity : AppCompatActivity(), ApplicationContract.View {
         //Set response to hitting the button
         val searchButton:Button = findViewById(R.id.my_button)
         searchButton.setOnClickListener {
-            presenter.onButtonTapped(station1, station2)
+            getDataNow(this)
         }
 
     }
@@ -75,6 +75,11 @@ class MainActivity : AppCompatActivity(), ApplicationContract.View {
     //functions promised in the contract
     override fun setLabel(text: String) {
         findViewById<TextView>(R.id.main_text).text = text
+    }
+
+    fun getDataNow(view: ApplicationContract.View) {
+        val url = presenter.addSelectedStations(station1,station2)
+        print(presenter.getData(view,url))
     }
 
     override fun setStations() {
