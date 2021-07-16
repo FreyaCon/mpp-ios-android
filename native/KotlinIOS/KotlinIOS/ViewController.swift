@@ -22,9 +22,13 @@ class ViewController: UIViewController {
         setStations()
     }
     
-
+//response to pressing button
     @IBAction func openURL(_ sender: UIButton ) {
+        if(presenter.checkForDiffStations(station1: station1, station2: station2)) {
+            
+        } else {
         presenter.onButtonTapped(stationStart:station1, stationEnd: station2)
+        }
     }
     
 }

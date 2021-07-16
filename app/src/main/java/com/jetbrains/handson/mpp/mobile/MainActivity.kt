@@ -68,9 +68,18 @@ class MainActivity : AppCompatActivity(), ApplicationContract.View {
         //Set response to hitting the button
         val searchButton:Button = findViewById(R.id.my_button)
         searchButton.setOnClickListener {
-            presenter.onButtonTapped(station1,station2)
+            if (presenter.checkForDiffStations(station1, station2)) {
+                toast("Start and End stations should be different")
+            } else {
+                presenter.onButtonTapped(station1, station2)
+            }
         }
 
+    }
+
+    //displays pop up message with string text
+    fun toast(text:String) {
+        Toast.makeText(this@MainActivity, text, Toast.LENGTH_LONG).show()
     }
 
     //functions promised in the contract
