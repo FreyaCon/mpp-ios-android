@@ -4,6 +4,7 @@ import io.ktor.client.HttpClient
 import io.ktor.client.features.json.JsonFeature
 import io.ktor.client.features.json.serializer.KotlinxSerializer
 import io.ktor.client.request.get
+import kotlinx.serialization.json.Json
 import kotlinx.serialization.json.JsonArray
 import kotlinx.serialization.json.JsonElement
 import kotlinx.serialization.json.JsonObject
@@ -16,14 +17,17 @@ fun createApplicationScreenMessage(): String {
 
 val client = HttpClient(){
     install(JsonFeature) {
-        serializer = KotlinxSerializer()
+        serializer = KotlinxSerializer(
+            Json{ignoreUnknownKeys=true}
+        )
     }
 }
 
 suspend fun getData(station1:Station, station2:Station) {
     val url = makeURL(station1,station2)
-    val response: JsonObject = client.get(url)
-    println(response)
+    val Data: TrainData = client.get(url)
+    println(Data)
+
 }
 
 //make URL for JSON request
