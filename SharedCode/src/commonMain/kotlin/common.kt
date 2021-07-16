@@ -23,10 +23,10 @@ val client = HttpClient(){
     }
 }
 
-suspend fun getData(station1:Station, station2:Station) {
+suspend fun getData(station1:Station, station2:Station): TrainData {
     val url = makeURL(station1,station2)
     val Data: TrainData = client.get(url)
-    println(Data)
+    return Data
 
 }
 

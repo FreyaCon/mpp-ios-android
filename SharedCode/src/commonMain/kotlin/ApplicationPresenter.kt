@@ -22,7 +22,7 @@ class ApplicationPresenter: ApplicationContract.Presenter() {
 
     override fun  onButtonTapped(stationStart:Station, stationEnd:Station){
         coroutineScope.launch {
-            getData(stationStart,stationEnd)
+            view?.displayJourneys(getData(stationStart,stationEnd))
         }
     }
 

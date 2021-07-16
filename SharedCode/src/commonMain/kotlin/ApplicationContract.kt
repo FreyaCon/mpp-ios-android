@@ -7,6 +7,9 @@ interface ApplicationContract {
         fun setLabel(text: String)
         fun openLink(linkString: String)
         fun setStations()
+        fun displayJourneys(JourneyCollection: TrainData)
+
+
         //fun setText (to update text output from JSON)
     }
 
