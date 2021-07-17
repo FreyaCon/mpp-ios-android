@@ -52,6 +52,9 @@ kotlin {
         implementation("io.ktor:ktor-client-json-jvm:${ktor_version}")
         implementation("io.ktor:ktor-client-logging-jvm:${ktor_version}")
         implementation("io.ktor:ktor-client-serialization-jvm:${ktor_version}")
+
+        // For control over item selection of both touch and mouse driven selection
+
     }
 
     sourceSets["iosMain"].dependencies {

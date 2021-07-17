@@ -19,6 +19,7 @@ val client = HttpClient(){
     install(JsonFeature) {
         serializer = KotlinxSerializer(
             Json{ignoreUnknownKeys=true}
+
         )
     }
 }

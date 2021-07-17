@@ -21,7 +21,7 @@ class MainActivity : AppCompatActivity(), ApplicationContract.View {
     var station1:Station = Station("","")
     var station2:Station = Station("","")
     val presenter: ApplicationPresenter = ApplicationPresenter()
-    var recyclerView: RecyclerView
+    lateinit var recyclerView: RecyclerView
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
