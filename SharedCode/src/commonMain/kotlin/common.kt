@@ -4,10 +4,10 @@ import io.ktor.client.HttpClient
 import io.ktor.client.features.json.JsonFeature
 import io.ktor.client.features.json.serializer.KotlinxSerializer
 import io.ktor.client.request.get
+import io.ktor.client.request.parameter
+import kotlinx.serialization.UnstableDefault
 import kotlinx.serialization.json.Json
-import kotlinx.serialization.json.JsonArray
-import kotlinx.serialization.json.JsonElement
-import kotlinx.serialization.json.JsonObject
+import com.soywiz.klock.*
 
 expect fun platformName(): String
 
@@ -15,6 +15,7 @@ fun createApplicationScreenMessage(): String {
     return "Kotlin Rocks on ${platformName()}"
 }
 
+@UnstableDefault
 val client = HttpClient(){
     install(JsonFeature) {
         serializer = KotlinxSerializer(
@@ -24,21 +25,41 @@ val client = HttpClient(){
 }
 
 suspend fun getData(station1:Station, station2:Station) {
-    val url = makeURL(station1,station2)
-    val Data: TrainData = client.get(url)
-    println(Data)
 
+    val time: DateTimeTz = DateTimeTz.nowLocal()+TimeSpan(60000.0)
+    val data: TrainData = client.get("https://mobile-api-softwire2.lner.co.uk/v1/fares") {
+        parameter("originStation", station1.code)
+        parameter("destinationStation", station2.code)
+        parameter("numberOfAdults", 1)
+        parameter("numberOfChildren", 0)
+        parameter("journeyType","single")
+        parameter("outboundDateTime", time.format("YYYY-MM-ddTHH:mm:ssXXX"))
+    }
 }
 
-//make URL for JSON request
-fun makeURL(station1:Station, station2:Station):String{
-
-    return "https://mobile-api-softwire2.lner.co.uk/v1/fares?originStation=${station1.code}" +
-            "&destinationStation=${station2.code}&noChanges=false&numberOfAdults=2" +
-            "&numberOfChildren=0&journeyType=single" +
-            "&outboundDateTime=2021-07-24T14%3A30%3A00.000%2B01%3A00&outboundIsArriveBy=false"
+fun timeConverter(time: String): SimpleDateTime{
+    var dt: SimpleDateTime = SimpleDateTime(0,0,0,0,0,0)
+    dt.day = time.subSequence(8,10).toString().toInt()
+    dt.month = time.subSequence(5,7).toString().toInt()
+    dt.year = time.subSequence(0,4).toString().toInt()
+    dt.hour = time.subSequence(11,13).toString().toInt()
+    dt.minute = time.subSequence(14,16).toString().toInt()
+    dt.gmt = time.subSequence(24,26).toString().toInt()
+    return dt
 }
 
+fun journeyTimeConverter(time: Int): Triple<Int,Int,Int>  {
+    //minutes
+    val c = time%60
+    //hours
+    var t = time - time%60
+    t /= 60
+    val b = t%24
+    t -= t%24
+    //days
+    val a = t/24
+    return Triple(a,b,c)
+}
 
 
 
