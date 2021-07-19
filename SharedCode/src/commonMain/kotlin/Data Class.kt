@@ -6,12 +6,12 @@ data class JsonStation(val displayName:String, val crs:String)
 @Serializable
 data class TrainData(val outboundJourneys:List<Train>)
 @Serializable
-class Train(val originStation: JsonStation
-                     , val destinationStation: JsonStation
-                     , val departureTime: String
-                     , val arrivalTime: String
-                     , val journeyDurationInMinutes: Int
-                     , val status: String)
+class Train(private val originStation: JsonStation,
+            private val destinationStation: JsonStation,
+            private val departureTime: String,
+            private val arrivalTime: String,
+            private val journeyDurationInMinutes: Int,
+            val status: String)
 {
     val startStation: Station
         get() = Station(originStation.displayName,originStation.crs)

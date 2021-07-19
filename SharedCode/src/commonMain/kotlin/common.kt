@@ -34,7 +34,7 @@ suspend fun getData(station1:Station, station2:Station): TrainData {
         parameter("numberOfAdults", 1)
         parameter("numberOfChildren", 0)
         parameter("journeyType","single")
-        parameter("outboundDateTime", time.format("YYYY-MM-ddTHH:mm:ssXXX")
+        parameter("outboundDateTime", time.format("YYYY-MM-ddTHH:mm:ssXXX"))
     }
 }
 
