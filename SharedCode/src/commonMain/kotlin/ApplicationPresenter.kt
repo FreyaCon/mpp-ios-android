@@ -30,7 +30,7 @@ class ApplicationPresenter: ApplicationContract.Presenter() {
         view!!.openLink("https://www.lner.co.uk/travel-information/travelling-now/live-train-times/depart/"+stationStart.code+"/"+stationEnd.code+"/#LiveDepResults")
     }
 
-    override fun checkForDiffStations(station1:Station, station2:Station):Boolean{
+    override fun checkForSameStations(station1:Station, station2:Station):Boolean{
         if(station1==station2) {
             return true
         }

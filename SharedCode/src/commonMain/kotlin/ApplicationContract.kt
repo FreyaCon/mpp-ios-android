@@ -8,9 +8,8 @@ interface ApplicationContract {
         fun openLink(linkString: String)
         fun setStations()
         fun displayJourneys(trains: TrainData)
+        fun toast(text:String)
 
-
-        //fun setText (to update text output from JSON)
     }
 
     abstract class Presenter: CoroutineScope {
@@ -18,6 +17,6 @@ interface ApplicationContract {
         abstract fun onTicketButtonTapped(stationStart:Station, stationEnd: Station)
         abstract fun onButtonTapped(stationStart:Station, stationEnd:Station)
         abstract val stations: List<Station>
-        abstract fun checkForDiffStations(station1: Station, station2: Station): Boolean
+        abstract fun checkForSameStations(station1: Station, station2: Station): Boolean
     }
 }

@@ -7,10 +7,10 @@ class ViewController: UIViewController {
     @IBOutlet private var button: UIButton!
     @IBOutlet private var startStation: UIPickerView!
     @IBOutlet private var endStation: UIPickerView!
-    private var station1: Station = Station(stationName: "",stationCode: "")
-    private var station2: Station = Station(stationName: "",stationCode: "")
     private let presenter: ApplicationContractPresenter = ApplicationPresenter()
     private var stationData: [Station] = []
+    private var station1: Station = Station(stationName: "",stationCode: "")
+    private var station2: Station = Station(stationName: "",stationCode: "")
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -20,12 +20,14 @@ class ViewController: UIViewController {
         self.endStation.delegate = self
         self.endStation.dataSource = self
         setStations()
+        station1 = stationData[0]
+        station2 = stationData[0]
     }
     
 //response to pressing button
     @IBAction func openURL(_ sender: UIButton ) {
-        if(presenter.checkForDiffStations(station1: station1, station2: station2)) {
-            
+        if(presenter.checkForSameStations(station1: station1, station2: station2)) {
+           toast(text:"Start and End Stations should be different")
         } else {
         presenter.onButtonTapped(stationStart:station1, stationEnd: station2)
         }
@@ -44,6 +46,12 @@ extension ViewController: ApplicationContractView { //Functions required in the 
     
     func setStations() {
         stationData = presenter.stations
+    }
+    
+    func toast(text:String) {
+        let alert = UIAlertController(title: "", message: text, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+        self.present(alert, animated: true, completion: nil)
     }
 }
 
