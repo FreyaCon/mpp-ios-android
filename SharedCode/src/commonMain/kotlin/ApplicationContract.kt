@@ -4,7 +4,6 @@ import kotlinx.coroutines.CoroutineScope
 
 interface ApplicationContract {
     interface View {
-        fun setLabel(text: String)
         fun openLink(linkString: String)
         fun setStations()
         fun displayJourneys(trains: TrainData)

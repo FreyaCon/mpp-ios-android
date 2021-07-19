@@ -15,6 +15,7 @@ class TrainAdapter(private val dataset: TrainData) : RecyclerView.Adapter<TrainA
         val destinationStation: TextView = itemView.findViewById<TextView>(R.id.arrivalStation)
         val departureTime: TextView = itemView.findViewById<TextView>(R.id.departureTime)
         val arrivalTime: TextView = itemView.findViewById<TextView>(R.id.arrivalTime)
+        val trainStatus: TextView = itemView.findViewById<TextView>(R.id.status)
 
     }
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TrainHolder {
@@ -31,11 +32,11 @@ class TrainAdapter(private val dataset: TrainData) : RecyclerView.Adapter<TrainA
     override fun onBindViewHolder(TrainHolder: TrainHolder, position: Int) {
         val journey = dataset.outboundJourneys[position]
 
-        TrainHolder.destinationStation.text = journey.endStation.name
-        TrainHolder.originStation.text = journey.startStation.name
+        TrainHolder.destinationStation.text = journey.endStation.code
+        TrainHolder.originStation.text = journey.startStation.code
         TrainHolder.departureTime.text = timeToString(journey.startTime)
         TrainHolder.arrivalTime.text = timeToString(journey.endTime)
-
+        TrainHolder.trainStatus.text=journey.status
     }
 
     private fun timeToString(time:SimpleDateTime):String {

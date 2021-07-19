@@ -85,11 +85,6 @@ class MainActivity : AppCompatActivity(), ApplicationContract.View {
         Toast.makeText(this@MainActivity, text, Toast.LENGTH_LONG).show()
     }
 
-    //functions promised in the contract
-    override fun setLabel(text: String) {
-        findViewById<TextView>(R.id.main_text).text = text
-    }
-
     override fun setStations() {
         stations = presenter.stations
     }
@@ -106,7 +101,7 @@ class MainActivity : AppCompatActivity(), ApplicationContract.View {
         recyclerView = findViewById<RecyclerView>(R.id.rvTrains)
         recyclerView.adapter = adapter
 
-        val layoutManager = LinearLayoutManager(this, RecyclerView.HORIZONTAL, false)
+        val layoutManager = LinearLayoutManager(this)
         recyclerView.layoutManager = layoutManager
 
         // add divider line
