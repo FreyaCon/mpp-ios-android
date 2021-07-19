@@ -7,10 +7,12 @@ class ViewController: UIViewController {
     @IBOutlet private var button: UIButton!
     @IBOutlet private var startStation: UIPickerView!
     @IBOutlet private var endStation: UIPickerView!
+    @IBOutlet private var table: UITableView!
     private let presenter: ApplicationContractPresenter = ApplicationPresenter()
-    private var stationData: [Station] = []
-    private var station1: Station = Station(stationName: "",stationCode: "")
-    private var station2: Station = Station(stationName: "",stationCode: "")
+    private var stationData: [Station]!
+    private var station1: Station!
+    private var station2: Station!
+    private var journeys: [Train]!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -36,8 +38,11 @@ class ViewController: UIViewController {
 }
 
 extension ViewController: ApplicationContractView { //Functions required in the contract
-    func setLabel(text: String) {
-        label.text = text
+    func displayJourneys(trains: TrainData) {
+        self.journeys = trains.outboundJourneys
+        table.dataSource = self
+        table.reloadData()
+        table.rowHeight = UITableView.automaticDimension
     }
     
     func openLink(linkString:String) {
@@ -52,6 +57,14 @@ extension ViewController: ApplicationContractView { //Functions required in the 
         let alert = UIAlertController(title: "", message: text, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
         self.present(alert, animated: true, completion: nil)
+    }
+    
+    func trainVisibility(bool: Bool) {
+        if(bool) {
+            table.isHidden = false
+        } else {
+            table.isHidden = true
+        }
     }
 }
 
@@ -78,5 +91,38 @@ extension ViewController: UIPickerViewDataSource {//functions required by UIPick
     func pickerView(_ picker: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
         return stationData.count
     }
-
 }
+    
+extension ViewController: UITableViewDataSource {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let journey = journeys[indexPath.item]
+        let cell = tableView.dequeueReusableCell(withIdentifier: "cellTypeIdentifier", for: indexPath) as! tableCell
+        cell.station1.text = journey.startStation.code
+        cell.station2.text = journey.endStation.code
+        cell.departureTime.text = timeToString(time:journey.startTime)
+        cell.arrivalTime.text = timeToString(time:journey.endTime)
+        cell.status.text = journey.status
+        return cell
+    }
+    
+    func tableView(_ table: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return journeys.count
+    }
+    
+    func timeToString(time:SimpleDateTime) -> String {
+    if(time.minute<10) {
+        return String(time.hour)+":0"+String(time.minute)
+    }
+    return String(time.hour)+":"+String(time.minute)
+    }
+}
+
+class tableCell : UITableViewCell {
+    @IBOutlet weak var station1: UILabel!
+    @IBOutlet weak var station2: UILabel!
+    @IBOutlet weak var departureTime: UILabel!
+    @IBOutlet weak var arrivalTime: UILabel!
+    @IBOutlet weak var status: UILabel!
+}
+
+

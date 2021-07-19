@@ -61,7 +61,7 @@ class MainActivity : AppCompatActivity(), ApplicationContract.View {
             AdapterView.OnItemSelectedListener {
 
                 override fun onItemSelected(arg0: AdapterView<*>, arg1: View, position: Int, id: Long) {
-                 station2= stations[position]
+                    station2= stations[position]
                 }
 
                  override fun onNothingSelected(arg0: AdapterView<*>) {
@@ -109,5 +109,13 @@ class MainActivity : AppCompatActivity(), ApplicationContract.View {
         recyclerView.addItemDecoration(dividerItemDecoration)
     }
 
-
+    override fun trainVisibility(bool: Boolean) {
+        if (this::recyclerView.isInitialized) {
+            if (bool) {
+                recyclerView.setVisibility(View.VISIBLE)
+            } else {
+                recyclerView.setVisibility(View.INVISIBLE)
+            }
+        }
+    }
 }

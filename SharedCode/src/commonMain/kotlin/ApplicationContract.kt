@@ -8,7 +8,7 @@ interface ApplicationContract {
         fun setStations()
         fun displayJourneys(trains: TrainData)
         fun toast(text:String)
-
+        fun trainVisibility(bool: Boolean)
     }
 
     abstract class Presenter: CoroutineScope {
