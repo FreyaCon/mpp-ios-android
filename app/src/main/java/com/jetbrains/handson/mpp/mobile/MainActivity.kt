@@ -6,7 +6,6 @@ import android.widget.TextView
 import android.content.Intent
 import android.net.Uri
 import android.widget.Button
-import android.widget.Spinner
 import android.widget.ArrayAdapter
 import kotlinx.android.synthetic.main.activity_main.*
 import android.view.View
@@ -20,7 +19,7 @@ class MainActivity : AppCompatActivity(), ApplicationContract.View {
     var stations: List<Station> = listOf()
     var station1:Station = Station("","")
     var station2:Station = Station("","")
-    val presenter: ApplicationPresenter = ApplicationPresenter()
+    private val presenter: ApplicationPresenter = ApplicationPresenter()
     lateinit var recyclerView: RecyclerView
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -72,7 +71,6 @@ class MainActivity : AppCompatActivity(), ApplicationContract.View {
         //Set response to hitting the button
         val searchButton:Button = findViewById(R.id.my_button)
         searchButton.setOnClickListener {
-            presenter.onButtonTapped(station1,station2)
             if (presenter.checkForDiffStations(station1, station2)) {
                 toast("Start and End stations should be different")
             } else {
@@ -101,8 +99,9 @@ class MainActivity : AppCompatActivity(), ApplicationContract.View {
         openURL.data = Uri.parse(linkString)
         startActivity(openURL)
     }
-    override fun displayJourneys(Trains: TrainData) {
-        val adapter = TrainAdapter(Trains)
+
+    override fun displayJourneys(trains: TrainData) {
+        val adapter = TrainAdapter(trains)
 
         recyclerView = findViewById<RecyclerView>(R.id.rvTrains)
         recyclerView.adapter = adapter
