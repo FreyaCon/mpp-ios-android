@@ -78,6 +78,15 @@ class MainActivity : AppCompatActivity(), ApplicationContract.View {
             }
         }
 
+        val ticketButton:Button = findViewById(R.id.ticket_button)
+        ticketButton.setOnClickListener {
+            if (presenter.checkForSameStations(station1, station2)) {
+                toast("Start and End stations should be different")
+            } else {
+                presenter.onTicketButtonTapped(station1, station2)
+            }
+        }
+
     }
 
     //displays pop up message with string text
