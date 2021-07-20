@@ -5,6 +5,7 @@ class ViewController: UIViewController {
     
     @IBOutlet private var label: UILabel!
     @IBOutlet private var button: UIButton!
+    @IBOutlet private var ticketButton: UIButton!
     @IBOutlet private var startStation: UIPickerView!
     @IBOutlet private var endStation: UIPickerView!
     @IBOutlet private var table: UITableView!
@@ -32,6 +33,14 @@ class ViewController: UIViewController {
            toast(text:"Start and End Stations should be different")
         } else {
         presenter.onButtonTapped(stationStart:station1, stationEnd: station2)
+        }
+    }
+    
+    @IBAction func getTickets(_ sender: UIButton ) {
+        if(presenter.checkForSameStations(station1: station1, station2: station2)) {
+           toast(text:"Start and End Stations should be different")
+        } else {
+        presenter.onTicketButtonTapped(stationStart:station1, stationEnd: station2)
         }
     }
     
