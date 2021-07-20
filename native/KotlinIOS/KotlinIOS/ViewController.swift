@@ -43,6 +43,7 @@ extension ViewController: ApplicationContractView { //Functions required in the 
         table.dataSource = self
         table.reloadData()
         table.rowHeight = UITableView.automaticDimension
+        self.table.register(UITableViewCell.classForKeyedArchiver(), forCellReuseIdentifier: "tableCell")
     }
     
     func openLink(linkString:String) {
@@ -96,7 +97,7 @@ extension ViewController: UIPickerViewDataSource {//functions required by UIPick
 extension ViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let journey = journeys[indexPath.item]
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cellTypeIdentifier", for: indexPath) as! tableCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "trainCell", for: indexPath) as! TableCell
         cell.station1.text = journey.startStation.code
         cell.station2.text = journey.endStation.code
         cell.departureTime.text = timeToString(time:journey.startTime)
@@ -117,7 +118,7 @@ extension ViewController: UITableViewDataSource {
     }
 }
 
-class tableCell : UITableViewCell {
+class TableCell : UITableViewCell {
     @IBOutlet weak var station1: UILabel!
     @IBOutlet weak var station2: UILabel!
     @IBOutlet weak var departureTime: UILabel!
