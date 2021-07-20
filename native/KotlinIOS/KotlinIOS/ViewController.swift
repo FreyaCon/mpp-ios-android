@@ -61,11 +61,6 @@ extension ViewController: ApplicationContractView { //Functions required in the 
     }
     
     func trainVisibility(bool: Bool) {
-        if(bool) {
-            table.isHidden = false
-        } else {
-            table.isHidden = true
-        }
     }
 }
 
