@@ -23,13 +23,13 @@ class ApplicationPresenter: ApplicationContract.Presenter() {
 
     @UnstableDefault
     override fun  onButtonTapped(stationStart:Station, stationEnd:Station){
-        //view?.trainVisibility(false)
+        view?.trainVisibility(false)
         coroutineScope.launch {
             val trains = getData(stationStart, stationEnd)
             if (trains.outboundJourneys.isEmpty()){
                 view?.toast("There are no trains available for this journey.")
             } else {
-                //view?.trainVisibility(true)
+                view?.trainVisibility(true)
                 view?.displayJourneys(trains)
             }
         }
